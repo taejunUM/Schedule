@@ -3,7 +3,6 @@ package com.example.schedule.controller;
 import com.example.schedule.dto.ScheduleRequestDto;
 import com.example.schedule.dto.ScheduleResponseDto;
 import com.example.schedule.service.ScheduleService;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/schedule")
+@RequestMapping("/schedules")
 
 public class ScheduleController {
 
@@ -52,13 +51,9 @@ public class ScheduleController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSchedule(
-            @PathVariable Long id,
-            @RequestBody ScheduleRequestDto dto
+            @PathVariable Long id
     ) {
-        int resultRow = scheduleService.deleteSchedule(id, dto);
-        if (resultRow == 0) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        scheduleService.deleteSchedule(id);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
